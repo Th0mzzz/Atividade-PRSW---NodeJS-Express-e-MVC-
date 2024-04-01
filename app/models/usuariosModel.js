@@ -11,7 +11,7 @@ const usuariosModel = {
     },
     mostrarTodos: async ()=>{
         try{
-            const [resultados] = await pool.query(`select * from usuario where status_usuario = 1`)
+            const [resultados] = await pool.query(`select * from usuario`)
             return resultados;
         }catch (error){
             return error;
@@ -26,9 +26,9 @@ const usuariosModel = {
             throw error
         }
     },
-    inativar: async (idUsuario)=>{
+    excluir: async (idUsuario)=>{
         try{
-            const [resultados] = await pool.query(`update usuario set status_usuario = 0 where id_usuario = ?`, [idUsuario])
+            const [resultados] = await pool.query(`delete from usuario where id_usuario = ?`, [idUsuario])
             return resultados;
         }catch (error){
             return error;
