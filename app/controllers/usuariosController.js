@@ -4,7 +4,7 @@ const usuariosModel = require('../models/usuariosModel');
 const usuariosController = {
     adicionarUsuario: async (req, res) => {
         try {
-            const { id, nome, nomeUsuario, email, senha, tipo, status } = req.body;
+            const { id, nome, cep,nomeUsuario, email, senha, tipo, status } = req.body;
             inserirUsuario = {
                 "id_usuario": id,
                 "nome_usuario": nome,
@@ -13,6 +13,7 @@ const usuariosController = {
                 "email_usuario": email,
                 "img_perfil_usuario": null,
                 "img_perfil_pasta": null,
+                "cep_usuario": cep,
                 "status_usuario": status,
                 "tipo_usuario_id_tipo_usuario": tipo
             }
@@ -62,7 +63,8 @@ const usuariosController = {
             if (!usuario) {
                 return res.json({ erro: error });
             }
-            const resultado = await usuariosModel.inativar(idUsuario);
+            const resultado = await usuariosModel.excluir(idUsuario);
+            console.log(resultado)
             res.redirect('/adm-cliente');
         } catch (error) {
             console.error(error);
@@ -78,7 +80,7 @@ const usuariosController = {
             if (!usuario) {
                 return res.render("pages/adm/error")
             }
-            const {nome, nomeUsuario, email, senha, tipo, status } = req.body
+            const { nome, cep, nomeUsuario, email, senha, tipo, status } = req.body
             atualizarUsuario = {
                 "nome_usuario": nome,
                 "user_usuario": nomeUsuario,
@@ -86,12 +88,13 @@ const usuariosController = {
                 "email_usuario": email,
                 "img_perfil_usuario": null,
                 "img_perfil_pasta": null,
+                "cep_usuario": cep,
                 "status_usuario": status,
                 "tipo_usuario_id_tipo_usuario": tipo
             }
             const resultado = await usuariosModel.atualizar(idUsuario, atualizarUsuario);
             res.redirect('/adm-cliente');
-            
+
         } catch (error) {
             res.json({ erro: error })
         }
