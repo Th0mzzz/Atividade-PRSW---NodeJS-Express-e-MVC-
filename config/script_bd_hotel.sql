@@ -58,11 +58,12 @@ CREATE TABLE `usuario` (
   `img_perfil_usuario` longblob,
   `img_perfil_pasta` varchar(50) DEFAULT NULL,
   `status_usuario` int DEFAULT '1',
+  `cep_usuario` int char(8) DEFAULT NULL,
   `tipo_usuario_id_tipo_usuario` int NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuario_tipo_usuario_idx` (`tipo_usuario_id_tipo_usuario`),
   CONSTRAINT `fk_usuario_tipo_usuario` FOREIGN KEY (`tipo_usuario_id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+); ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
